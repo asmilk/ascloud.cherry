@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8" />
+<title>error.html</title>
+</head>
+<body>
+	<dl>
+		<dt>timestamp:</dt>
+		<dd th:text="${#dates.format(timestamp, 'yyyy/MM/dd HH:mm:ss.S z')}" />
+		<dt>path:</dt>
+		<dd th:text="${path}" />
+		<dt>status:</dt>
+		<dd th:text="${status}" />
+		<dt>error:</dt>
+		<dd th:text="${error}" />
+		<dt>message:</dt>
+		<dd th:text="${message}" />
+		<dt>exception:</dt>
+		<dd th:text="${exception}" />
+		<dt>errors:</dt>
+		<dd th:text="${errors}" />
+		<dt>trace:</dt>
+		<dd th:text="${trace}" />
+	</dl>
+	<a th:href="@{/}">/index</a>
+</body>
+</html>

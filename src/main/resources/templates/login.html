@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8"></meta>
+<title th:text="#{login.title}"></title>
+</head>
+<body onload="document.forms[0].submit();">
+	<form th:action="@{http://oauth2.server:8822/oauth/login}" th:object="${user}" method="post">
+		<input type="hidden" th:field="*{username}" />
+		<input type="hidden" th:field="*{password}" />
+		<input type="hidden" th:field="*{redirectUrl}" />
+	</form>
+</body>
+</html>

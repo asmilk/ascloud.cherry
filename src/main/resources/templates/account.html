@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8" />
+<title th:text="#{account.title}"></title>
+</head>
+<body>
+	<form th:action="@{/oauth/register}" th:object="${user}" method="post">
+		<fieldset>
+			<legend th:text="#{account.form.fieldset.legend}"></legend>
+			<div>
+				<label th:text="#{account.form.label.username}" for="username"></label><input type="text" th:field="*{username}" />
+			</div>
+			<div>
+				<label th:text="#{account.form.label.phone}" for="phone"></label><input type="text" th:field="*{phone}" />
+			</div>
+			<div>
+				<label th:text="#{account.form.label.password}" for="password"></label><input type="password" th:field="*{password}" />
+			</div>
+			<div>
+				<label th:text="#{account.form.label.rePassword}" for="rePassword"></label><input type="password" th:field="*{rePassword}" />
+			</div>
+			<div>
+				<input type="checkbox" name="remember-me" value="true" /><span th:text="#{account.form.label.remember-me}"></span>
+			</div>
+			<div>
+				<input type="submit" th:value="#{account.form.button.submit}" />
+			</div>
+		</fieldset>
+	</form>
+</body>
+</html>

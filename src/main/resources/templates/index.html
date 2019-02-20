@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8" />
+<title th:text="#{index.title}"></title>
+</head>
+<body>
+	<div sec:authorize="isAuthenticated()">
+		<h1>isAuthenticated</h1>
+		
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Logout" />
+		</form>
+		<h6>authorities:</h6>
+		<ul th:each="item : ${#authentication.authorities}">
+			<li th:text="${item.authority}"></li>
+		</ul>
+
+		<h6>hasRole:</h6>
+		<span sec:authorize="hasRole('ROLE_ADMIN')">[ROLE_ADMIN]</span>
+		<span sec:authorize="hasRole('ROLE_STAFF')">[ROLE_STAFF]</span>
+		<span sec:authorize="hasRole('ROLE_USER')">[ROLE_USER]</span>
+
+		<div th:switch="${#authentication.authorizedClientRegistrationId}">
+			<dl th:case="qq">
+				<dt sec:authentication="principal.attributes[nickname]" />
+				<dd>
+					<img width="100" alt="qq" th:src="${#authentication.principal.attributes.figureurl_qq_1}">
+				</dd>
+			</dl>
+			<dl th:case="github">
+				<dt sec:authentication="principal.attributes[login]" />
+				<dd>
+					<img width="100" alt="github" th:src="${#authentication.principal.attributes.avatar_url}">
+				</dd>
+			</dl>
+			<dl th:case="weixin">
+				<dt sec:authentication="principal.attributes[nickname]" />
+				<dd>
+					<img width="100" alt="weixin" th:src="${#authentication.principal.attributes.headimgurl}">
+				</dd>
+			</dl>
+			<dl th:case="okta">
+				<dt sec:authentication="principal.attributes[name]" />
+				<dd>
+					<img width="100" alt="okta" th:src="${#authentication.principal.attributes.profile}">
+				</dd>
+			</dl>
+			<dl th:case="weibo">
+				<dt sec:authentication="principal.attributes[name]" />
+				<dd>
+					<img width="100" alt="weibo" th:src="${#authentication.principal.attributes.avatar_hd}">
+				</dd>
+			</dl>
+			<dl th:case="uaa">
+				<dt sec:authentication="principal.attributes[name]" />
+				<dd></dd>
+			</dl>
+		</div>
+
+		<dl>
+			<dt>provider:</dt>
+			<dd sec:authentication="authorizedClientRegistrationId" />
+			<dt>name:</dt>
+			<dd sec:authentication="name" />
+			<dt>credentials:</dt>
+			<dd sec:authentication="credentials" />
+			<dt>authorities:</dt>
+			<dd sec:authentication="authorities" />
+			<dt>details:</dt>
+			<dd sec:authentication="details" />
+			<dt>principal:</dt>
+			<dd sec:authentication="principal" />
+			<dt>principal.attributes:</dt>
+			<dd sec:authentication="principal.attributes" />
+		</dl>
+
+	</div>
+	<ul>
+		<li><a th:href="@{/oauth2/authorization/github}">Github</a></li>
+		<li><a th:href="@{/oauth2/authorization/okta}">Okta</a></li>
+		<li><a th:href="@{/oauth2/authorization/uaa}">Uaa</a></li>
+		<li><a th:href="@{/oauth2/authorization/weibo}">Weibo</a></li>
+		<li><a th:href="@{/oauth2/authorization/weixin}">Weixin</a></li>
+		<li><a th:href="@{/oauth2/authorization/qq}">QQ</a></li>
+	</ul>
+</body>
+</html>
